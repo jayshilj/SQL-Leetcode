@@ -1,0 +1,16 @@
+-- Solution for 184 Leetcode
+
+with cte as (
+
+select  e.Name as Employee, 
+        e.Salary as Salary,
+        d.Name as Department,
+        rank() OVER(partition by d.Id ORDER BY e.Salary desc) as r
+from Employee e
+inner join Department d on e.DepartmentId = d.Id
+    )
+    
+    
+select Department, Employee, Salary
+from cte     
+where r = 1

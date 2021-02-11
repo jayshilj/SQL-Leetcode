@@ -1,0 +1,10 @@
+-- 608. Tree Node
+
+select distinct t.id,
+case
+    when t.p_id is NULL then 'Root'
+    when t2.p_id = t.id then 'Inner'
+    else 'Leaf'
+end as Type
+from tree t
+left join tree t2 on t.id = t2.p_id 
